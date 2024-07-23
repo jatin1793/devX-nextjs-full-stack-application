@@ -26,7 +26,7 @@ import mongoose from "mongoose";
 import { languages, Language } from "../constants/languages";
 
 
-const defaultSnippets: Record<string, string> = languages.reduce((acc, lang) => {
+const defaultSnippets = languages.reduce((acc, lang) => {
     acc[lang.name] = lang.snippet;
     return acc;
 }, {});

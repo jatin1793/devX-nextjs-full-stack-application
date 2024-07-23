@@ -15,7 +15,7 @@ import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrig
 import { Loader2 } from 'lucide-react';
 
 
-const page = () => {
+const Page = () => {
 
     const router = useRouter();
 
@@ -51,7 +51,7 @@ const page = () => {
                 <DialogHeader>
                     <DialogTitle>Create File</DialogTitle>
                     <DialogDescription>
-                        Create a new file. Click Create when you're done.
+                        Create a new file. Click Create when you&apos;re done.
                     </DialogDescription>
                 </DialogHeader>
 
@@ -114,4 +114,4 @@ const page = () => {
     )
 }
 
-export default page
+export default Page

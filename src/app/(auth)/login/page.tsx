@@ -181,7 +181,7 @@ export default function LoginPage() {
             )}
           />
 
-          <FormDescription>Didn't have a account? <Link href="/signup" className="text-blue-400">Signup</Link></FormDescription>
+          <FormDescription>Didn&apos;t have a account? <Link href="/signup" className="text-blue-400">Signup</Link></FormDescription>
           <Button type="submit">Submit</Button>
         </form>
       </div>

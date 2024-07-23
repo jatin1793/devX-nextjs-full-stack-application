@@ -2,22 +2,9 @@ import { ConnectionToDB } from "@/configs/db_config";
 import Credentials from "next-auth/providers/credentials";
 import GithubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
-import { AuthOptions, ISODateString, User } from "next-auth";
 import { User as UserModel } from "@/models/user.model";
-import { JWT } from "next-auth/jwt";
 
-export type CustomSession = {
-    user: CustomUser;
-    expires: ISODateString;
-};
-
-export type CustomUser = {
-    id: string | null;
-    username: string | null;
-    email: string | null;
-};
-
-export const authOptions: AuthOptions = {
+export const authOptions = {
     pages: {
         signIn: "/login",
     },
@@ -43,7 +30,7 @@ export const authOptions: AuthOptions = {
             }
         },
 
-        async jwt({ token, user }: { token: JWT; user: CustomUser }) {
+        async jwt({ token, user }) {
             if (user) {
                 token.user = user;
             }
@@ -54,12 +41,8 @@ export const authOptions: AuthOptions = {
             session,
             token,
             user,
-        }: {
-            session: CustomSession;
-            token: JWT;
-            user: User;
         }) {
-            session.user = token.user as CustomUser;
+            session.user = token.user;
             return session;
         },
     },
@@ -91,13 +74,13 @@ export const authOptions: AuthOptions = {
         }),
 
         GithubProvider({
-            clientId: process.env.GITHUB_CLIENT_ID!,
-            clientSecret: process.env.GITHUB_CLIENT_SECRET!,
+            clientId: process.env.GITHUB_CLIENT_ID,
+            clientSecret: process.env.GITHUB_CLIENT_SECRET,
         }),
 
         GoogleProvider({
-            clientId: process.env.GOOGLE_CLIENT_ID!,
-            clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
+            clientId: process.env.GOOGLE_CLIENT_ID,
+            clientSecret: process.env.GOOGLE_CLIENT_SECRET,
         }),
     ],
 };

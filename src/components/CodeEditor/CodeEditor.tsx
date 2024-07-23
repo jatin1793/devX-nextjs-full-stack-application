@@ -28,14 +28,14 @@ const CodeEditor = () => {
     return (
         <div>
             <div className="flex gap-12">
-                <Select onValueChange={(e: any) => {setLanguage(e); setcode()}}>
+                <Select onValueChange={(e: any) => {setLanguage(e)}}>
                     <SelectTrigger className="w-[280px]">
                         <SelectValue placeholder="Select the language" />
                     </SelectTrigger>
                     <SelectContent>
                         {languages?.map((lang: any) => {
                             return (
-                                <SelectItem value={lang}>
+                                <SelectItem value={lang} key={lang}>
                                     {lang.name} ({lang.version})
                                 </SelectItem>
                             )

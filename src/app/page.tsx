@@ -28,7 +28,7 @@ import toast from 'react-hot-toast';
 import { useForm } from 'react-hook-form'
 import NewFileDialog from '../components/NewFileDialog'
 
-const page = () => {
+const Page = () => {
 
   const router = useRouter();
 
@@ -55,4 +55,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page
