@@ -1,26 +1,58 @@
-import Image from "next/image";
+"use client"
 
-export default function Home() {
+import { Button } from '@/components/ui/button'
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { languages } from "@/constants/languages";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+import axios from 'axios';
+import { useRouter } from 'next/navigation';
+import React, { useState } from 'react'
+import toast from 'react-hot-toast';
+import { useForm } from 'react-hook-form'
+import NewFileDialog from '../components/NewFileDialog'
+
+const page = () => {
+
+  const router = useRouter();
+
+  const logOutHandler = async () => {
+    try {
+      const res = await axios.get("/api/auth/logout");
+      if (res.status === 200) {
+        toast.success("Log out successfully !")
+        router.push('/login')
+      }
+    }
+    catch (error: any) {
+      toast.error("Something went wrong !")
+    }
+  }
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="relative z-[-1] flex place-items-center before:absolute before:h-[300px] before:w-full before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 sm:before:w-[480px] sm:after:w-[240px] before:lg:h-[360px]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-    </main>
-  );
+    <div>
+      Home page
+      <Button onClick={logOutHandler}>Log out</Button>
+      <Button onClick={()=> router.push('/view-all-files')}>View All Files</Button>
+      <NewFileDialog />
+    </div>
+  )
 }
+
+export default page
